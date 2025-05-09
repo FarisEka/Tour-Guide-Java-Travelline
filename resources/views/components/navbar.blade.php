@@ -18,7 +18,7 @@
                     <a class="nav-link text-black hover-bg" href="#">Daftar Sebagai Tour Guide</a>
                 </li>
                 <li class="nav-item me-5">
-                    <a class="nav-link text-black hover-bg" href="#">Login</a>
+                    <a class="nav-link text-black hover-bg" href="{{ url('/register') }}">Login</a>
                 </li>
             </ul>
         </div>
