@@ -8,7 +8,7 @@
         </button>
         <div class=" navbar-collapse" id="navbarNav">
             <a class="navbar-brand me-auto" href="#">
-                <img src="{{ asset('images/logo-JT.png') }}" alt="" class="" width="110" height="90">
+                <img src="{{ asset('images/logo-JT.png') }}" alt="logo Java Travelline" class="" width="110" height="90">
             </a>
             <ul class="navbar-nav fw-medium">
                 <li class="nav-item me-5">

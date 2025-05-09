@@ -8,13 +8,13 @@
         </div>
 
         <div>
-            <a href="https://twitter.com" target="_blank" class="text-dark me-3">
+            <a href="https://twitter.com" target="_blank" class="text-info me-3">
                 <i class="fab fa-twitter fa-lg"></i>
             </a>
-            <a href="https://instagram.com" target="_blank" class="text-dark me-3">
+            <a href="https://instagram.com" target="_blank" class="text-info me-3">
                 <i class="fab fa-instagram fa-lg"></i>
             </a>
-            <a href="https://linkedin.com" target="_blank" class="text-dark">
+            <a href="https://linkedin.com" target="_blank" class="text-info">
                 <i class="fab fa-linkedin fa-lg"></i>
             </a>
         </div>
