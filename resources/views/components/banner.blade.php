@@ -11,8 +11,8 @@
             temukan guide terbaik sesuai kebutuhan Anda
             </p>
             <div class="d-flex justify-content-center gap-2 mt-3">
-            <button type="button" class="btn btn-info">Daftar Sekarang</button>
-            <button type="button" class="btn btn-outline-info">Cari Tour Guide</button>
+            <button type="button" class="btn btn-info fw-medium">Daftar Sekarang</button>
+            <button type="button" class="btn btn-outline-info fw-medium">Cari Tour Guide</button>
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm sticky-top">
+<nav class="navbar navbar-expand-sm">
     <div class="container-fluid">
         <div class="container">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
