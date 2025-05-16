@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateTourGuideTipeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tour_guide_tipe', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('id_guide');
+            $table->unsignedBigInteger('id_tipe');
+
+            $table->primary(['id_guide', 'id_tipe']);
+
+            $table->foreign('id_guide')->references('id')->on('tour_guide_profiles')->onDelete('cascade');
+            $table->foreign('id_tipe')->references('id')->on('tipe_keahlian')->onDelete('cascade');
         });
     }
 

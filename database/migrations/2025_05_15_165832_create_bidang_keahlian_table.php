@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateBidangKeahlianTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('bidang_keahlian', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_bidang',100);
             $table->timestamps();
         });
     }

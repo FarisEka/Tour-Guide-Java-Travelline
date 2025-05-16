@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateTourGuideBidangTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tour_guide_bidang', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+             $table->unsignedBigInteger('id_guide');
+            $table->unsignedBigInteger('id_bidang');
+
+            $table->primary(['id_guide', 'id_bidang']);
+
+            $table->foreign('id_guide')->references('id')->on('tour_guide_profiles')->onDelete('cascade');
+            $table->foreign('id_bidang')->references('id')->on('bidang_keahlian')->onDelete('cascade');
         });
     }
 
