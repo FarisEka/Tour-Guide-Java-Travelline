@@ -3,36 +3,31 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\TourGuideController as AdminTourGuideController;
 use App\Http\Controllers\Guide\DashboardController as GuideDashboardController;
 
 //
-// TRAVELLER ROUTES (Non-login user)
+// PUBLIC ROUTES (Untuk traveller, tanpa login)
 //
-Route::get('/', function () {
-    return view('traveller.home');
-})->name('home');
-
-Route::get('/booking', function () {
-    return view('traveller.booking');
-})->name('booking');
-
-Route::get('/search', function () {
-    return view('traveller.search');
-})->name('search');
-
+Route::view('/', 'traveller.home')->name('home');
+Route::view('/booking', 'traveller.booking')->name('booking');
+Route::view('/search', 'traveller.search')->name('search');
 
 //
-// TOUR GUIDE ROUTES (Logged-in user)
+// GUIDE ROUTES (Untuk tour guide setelah login)
 //
-Route::middleware(['auth', 'verified'])->prefix('guide')->group(function () {
-    Route::get('/dashboard', [GuideDashboardController::class, 'index'])->name('guide.dashboard');
+Route::middleware(['auth', 'verified'])->prefix('guide')->name('guide.')->group(function () {
+    Route::get('/dashboard', [GuideDashboardController::class, 'index'])->name('dashboard');
 });
 
 //
-// ADMIN ROUTES
+// ADMIN ROUTES (Untuk admin setelah login)
 //
-Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/tour-guides', [AdminTourGuideController::class, 'index'])->name('tour-guides.index');
+    Route::get('/admin/tour-guides/menunggu-verifikasi', [AdminTourGuideController::class, 'pending'])->name('tour-guides.pending');
+
 });
 
 //
@@ -45,6 +40,6 @@ Route::middleware('auth')->group(function () {
 });
 
 //
-// LARAVEL BAWAAN AUTH
+// AUTH ROUTES (Laravel default: login, register, forgot, dll)
 //
 require __DIR__.'/auth.php';
