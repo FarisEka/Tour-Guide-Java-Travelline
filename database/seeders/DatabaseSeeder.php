@@ -19,7 +19,10 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            AdminUserSeeder::class,
-        ]);
+        AdminUserSeeder::class,
+        BidangKeahlianSeeder::class,
+        TipeKeahlianSeeder::class,
+        TourGuideSeeder::class,
+    ]);
     }
 }

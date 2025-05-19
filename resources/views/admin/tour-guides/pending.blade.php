@@ -1,30 +1,35 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="max-w-3xl mx-auto py-8 px-4">
-    <div class="flex items-center justify-content-between mb-6">
-        <h1 class="text-2xl font-bold text-gray-800">Menunggu Verifikasi</h1>
-        <a href="{{ route('admin.dashboard') }}" class="text-blue-600 flex items-center">
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h4 fw-bold text-dark">Menunggu Verifikasi</h1>
+        <a href="{{ route('admin.dashboard') }}" class="text-primary text-decoration-none">
             ← Kembali
         </a>
     </div>
 
-    <div class="bg-white rounded-xl shadow-md divide-y">
-        @foreach ($pendingGuides as $guide)
-        <div class="flex items-center justify-between p-4">
-            <div class="flex items-center space-x-4">
-                <img src="{{ $guide->photo_url }}" alt="{{ $guide->name }}" class="w-14 h-14 rounded-full object-cover">
-                <div>
-                    <h2 class="font-semibold text-lg text-gray-800">{{ $guide->name }}</h2>
-                    <p class="text-sm text-gray-500">{{ $guide->city }}</p>
+    <div class="card shadow-sm">
+        <div class="list-group list-group-flush">
+            @forelse ($pendingGuides as $guide)
+                <div class="list-group-item d-flex justify-content-between align-items-center py-3">
+                    <div class="d-flex align-items-center">
+                        <img src="{{ $guide->photo_url }}" alt="{{ $guide->name }}" class="rounded-circle me-3" width="56" height="56" style="object-fit: cover;">
+                        <div>
+                            <h5 class="mb-0">{{ $guide->name }}</h5>
+                            <small class="text-muted">{{ $guide->city }}</small>
+                        </div>
+                    </div>
+                    <a href="{{ route('admin.tour-guides.detail', $guide->id) }}" class="btn btn-primary btn-sm">
+                        Detail
+                    </a>
                 </div>
-            </div>
-            <a href="{{ route('admin.guide.show', $guide->id) }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                Detail
-            </a>
+            @empty
+                <div class="list-group-item py-4 text-center text-muted">
+                    Tidak ada data tour guide yang menunggu verifikasi.
+                </div>
+            @endforelse
         </div>
-        @endforeach
     </div>
-
 </div>
 @endsection

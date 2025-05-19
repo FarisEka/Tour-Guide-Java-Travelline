@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function tourGuideProfile()
+{
+    return $this->hasOne(TourGuideProfiles::class, 'user_id');
+}
 }

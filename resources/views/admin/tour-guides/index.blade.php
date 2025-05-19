@@ -10,7 +10,7 @@
     <div class="card p-3">
         @foreach ($tourGuides as $guide)
             <div class="d-flex align-items-center py-3 border-bottom">
-                <img src="{{ $guide->photo_url ?? 'https://via.placeholder.com/60' }}" class="rounded-circle me-3" width="60" height="60" alt="Foto">
+                <img src="{{ $guide->photo_url  }}" class="rounded-circle me-3" width="60" height="60" alt="Foto">
                 <div>
                     <h5 class="mb-0 fw-semibold">{{ $guide->name }}</h5>
                     <small class="text-muted">

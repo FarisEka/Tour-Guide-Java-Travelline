@@ -6,6 +6,10 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\TourGuideController as AdminTourGuideController;
 use App\Http\Controllers\Guide\DashboardController as GuideDashboardController;
 
+
+Route::get('/test-login-route', function () {
+    return route('login');
+});
 //
 // PUBLIC ROUTES (Untuk traveller, tanpa login)
 //
@@ -27,6 +31,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/tour-guides', [AdminTourGuideController::class, 'index'])->name('tour-guides.index');
     Route::get('/admin/tour-guides/menunggu-verifikasi', [AdminTourGuideController::class, 'pending'])->name('tour-guides.pending');
+    Route::get('/admin/tour-guides/menunggu-verifikasi/detail', [AdminTourGuideController::class, 'detail'])->name('tour-guides.detail');
+    Route::get('/tour-guides/{id}', [AdminTourGuideController::class, 'show'])->name('tour-guides.detail');
+    Route::post('/tour-guides/{id}/verify', [AdminTourGuideController::class, 'verify'])->name('tour-guides.verify');
+    Route::post('/tour-guides/{id}/reject', [AdminTourGuideController::class, 'reject'])->name('tour-guides.reject');
 
 });
 

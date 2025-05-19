@@ -50,7 +50,7 @@
             <table class="table table-bordered table-hover mb-0">
                 <thead class="table-light">
                     <tr class="small text-muted">
-                        <th>#</th>
+                        <th>No</th>
                         <th>Nama</th>
                         <th>No. HP</th>
                         <th>Status</th>
