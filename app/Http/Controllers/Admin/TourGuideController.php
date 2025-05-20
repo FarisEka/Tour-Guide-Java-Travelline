@@ -22,21 +22,21 @@ class TourGuideController extends Controller
     public function pending()
     {
         // Data dummy manual
-    $pendingGuides = [
-        (object)[
-            'id' => 1,
-            'name' => 'Fajar Rahman',
-            'city' => 'Malang',
-            'photo_url' => 'https://i.pravatar.cc/150?img=1' // gambar random
-        ],
-        (object)[
-            'id' => 2,
-            'name' => 'Dewi Lestari',
-            'city' => 'Bandung',
-            'photo_url' => 'https://i.pravatar.cc/150?img=2'
-        ],
-    ];
-    return view('admin.tour-guides.pending', compact('pendingGuides'));
+        $pendingGuides = [
+            (object) [
+                'id' => 1,
+                'name' => 'Fajar Rahman',
+                'city' => 'Malang',
+                'photo_url' => 'https://i.pravatar.cc/150?img=1' // gambar random
+            ],
+            (object) [
+                'id' => 2,
+                'name' => 'Dewi Lestari',
+                'city' => 'Bandung',
+                'photo_url' => 'https://i.pravatar.cc/150?img=2'
+            ],
+        ];
+        return view('admin.tour-guides.pending', compact('pendingGuides'));
         // $pendingGuides = TourGuideProfiles::where('status_verifikasi', 'menunggu')->get();
         // return view('admin.tour-guides.pending', compact('pendingGuides'));
     }
@@ -47,10 +47,51 @@ class TourGuideController extends Controller
     // }
 
     public function show($id)
+    {
+        $guide = TourGuideProfiles::with(['user', 'bidangKeahlian', 'tipeKeahlian'])->findOrFail($id);
+        return view('admin.tour-guides.detail', compact('guide'));
+    }
+
+    public function user()
 {
-    $guide = TourGuideProfiles::with(['user', 'bidangKeahlian', 'tipeKeahlian'])->findOrFail($id);
-    return view('admin.tour-guides.detail', compact('guide'));
+    return $this->belongsTo(User::class, 'user_id');
 }
+
+
+    public function bidangKeahlian()
+    {
+        return $this->belongsToMany(BidangKeahlian::class, 'tour_guide_bidang', 'id_guide', 'id_bidang');
+    }
+
+    public function tipeKeahlian()
+    {
+        return $this->belongsToMany(TipeKeahlian::class, 'tour_guide_tipe', 'id_guide', 'id_tipe');
+    }
+
+
+    public function terverifikasi(Request $request)
+    {
+        $guides = TourGuideProfiles::with(['user', 'bidangKeahlian', 'tipeKeahlian'])
+            ->where('status_verifikasi', 'terverifikasi')
+            ->when($request->domisili, function ($q) use ($request) {
+                $q->where('domisili_hpi', 'like', '%' . $request->domisili . '%');
+            })
+            ->when($request->bidang_keahlian, function ($q) use ($request) {
+                $q->whereHas('bidangKeahlian', function ($subQuery) use ($request) {
+                    $subQuery->where('nama_bidang', 'like', '%' . $request->bidang_keahlian . '%');
+                });
+            })
+            ->when($request->tipe_keahlian, function ($q) use ($request) {
+                $q->whereHas('tipeKeahlian', function ($subQuery) use ($request) {
+                    $subQuery->where('nama_tipe', $request->tipe_keahlian);
+                });
+            })
+            ->with(['user', 'bidangKeahlian', 'tipeKeahlian'])
+            ->get();
+
+        return view('admin.tour-guides.terverifikasi', compact('guides'));
+    }
+
 
 
 }

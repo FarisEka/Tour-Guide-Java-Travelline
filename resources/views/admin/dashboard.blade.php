@@ -26,12 +26,14 @@
             </a>
         </div>
         <div class="col-md-3 mb-3">
+            <a href="{{ route('admin.tour-guides.terverifikasi') }}" class="text-decoration-none">
             <div class="card text-white bg-success">
                 <div class="card-body">
                     <div class="small">Terverifikasi</div>
                     <div class="h4 fw-bold">{{ $verifiedGuides }}</div>
                 </div>
             </div>
+            </a>
         </div>
         <div class="col-md-3 mb-3">
             <div class="card text-white bg-danger">
