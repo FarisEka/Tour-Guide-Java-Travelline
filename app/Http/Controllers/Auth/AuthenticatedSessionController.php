@@ -30,10 +30,10 @@ class AuthenticatedSessionController extends Controller
 
         if (auth()->user()->role === 'admin') {
             return redirect()->route('admin.dashboard');
-        } elseif (auth()->user()->role === 'guide') {
-            return redirect()->route('guide.dashboard');
+        } elseif (auth()->user()->role === 'pengguna') {
+            return redirect()->route('tour-guide.create');
         } else {
-            return redirect()->route('traveller.home');
+            return redirect()->route('tour-guide.create');
         }
     }
 

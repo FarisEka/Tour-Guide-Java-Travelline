@@ -25,7 +25,9 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom shadow px-4 py-3">
         <div class="container-fluid d-flex justify-content-between align-items-center">
-            <h1 class="h5 mb-0 fw-bold text-white">Admin Dashboard</h1>
+            <a href="{{ route('admin.dashboard') }}"
+            <h1 class="h5 mb-0 fw-bold text-white text-decoration-none">Admin Dashboard</h1>
+            </a>
             <span class="text-white">Halo, Admin</span>
         </div>
     </nav>

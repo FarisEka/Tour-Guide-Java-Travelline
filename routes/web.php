@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\TourGuideController as AdminTourGuideController;
 use App\Http\Controllers\Guide\DashboardController as GuideDashboardController;
+use App\Http\Controllers\TourGuideRegistrationController;
 
 
 Route::get('/test-login-route', function () {
@@ -43,6 +44,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 // AUTHENTICATED USER PROFILE
 //
 Route::middleware('auth')->group(function () {
+    Route::get('/daftar-tour-guide', [TourGuideRegistrationController::class, 'create'])->name('tour-guide.create');
+    Route::post('/daftar-tour-guide', [TourGuideRegistrationController::class, 'store'])->name('tour-guide.store');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

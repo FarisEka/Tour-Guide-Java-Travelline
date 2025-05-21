@@ -4,7 +4,7 @@
     <div class="container mt-4">
 
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h3 class="fw-bold">Total Tour Guide</h3>
+            <h3 class="fw-bold">Tour Guide Terverifikasi</h3>
             <a href="{{ route('admin.dashboard') }}" class="text-decoration-none">&larr; Kembali</a>
         </div>
 
@@ -63,6 +63,8 @@
             <thead class="table-light">
                 <tr>
                     <th>Nama</th>
+                    <th>Email</th>
+                    <th>No Telepon</th>
                     <th>Domisili</th>
                     <th>Bidang Keahlian</th>
                     <th>Tipe Keahlian</th>
@@ -72,6 +74,8 @@
                 @forelse ($guides as $guide)
                     <tr>
                         <td>{{ $guide->user->nama_lengkap ?? '-' }}</td>
+                        <td>{{ $guide->user->email }}</td>
+                <td>{{ $guide->no_telepon }}</td>
                         <td>
                             {{ $guide->domisili_hpi }}
                         </td>
