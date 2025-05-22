@@ -24,11 +24,11 @@
                 </div>
                 <div class="col-md-3">
                     <label for="usia" class="form-label fw-semibold">Usia</label>
-                    <input type="number" class="form-control" name="usia" id="usia" required>
+                    <input type="number" class="form-control" name="usia" min="18" max="100" id="usia" required>
                 </div>
                 <div class="col-md-3">
                     <label for="no_telepon" class="form-label fw-semibold">Nomor Telepon</label>
-                    <input type="text" class="form-control" placeholder="08xxxxxxxxxx" name="no_telepon" id="no_telepon" required>
+                    <input type="text" class="form-control" placeholder="08xxxxxxxxxx"  name="no_telepon" id="no_telepon" required>
                 </div>
                 <div class="col-md-4">
                     <label for="tempat_lahir" class="form-label fw-semibold">Tempat Lahir</label>
