@@ -11,7 +11,7 @@
         <div class="mb-4">
             <label for="nama_lengkap" class="form-label fw-semibold ">Nama Lengkap</label>
             <input type="text" class=" bg-light" name="nama_lengkap" id="nama_lengkap" 
-                   value="{{ Auth::user()->name }}" readonly>
+                   value="{{ Auth::user()->nama_lengkap }}" readonly>
         </div>
 
         {{-- INFORMASI PRIBADI --}}
@@ -85,6 +85,41 @@
                 </div>
             </div>
         </div>
+        {{-- BIDANG & TIPE KEAHLIAN --}}
+<div class="mb-4">
+    <h5 class="fw-bold mb-3 border-bottom pb-2 text-primary">Bidang & Tipe Keahlian</h5>
+    
+    {{-- Bidang Keahlian --}}
+    <div class="mb-3">
+        <label class="form-label fw-semibold">Pilih Bidang Keahlian Anda:</label>
+        <div class="row">
+            @foreach($bidangKeahlian as $bidang)
+                <div class="col-md-4">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="bidang_keahlian[]" value="{{ $bidang->id }}" id="bidang_{{ $bidang->id }}">
+                        <label class="form-check-label" for="bidang_{{ $bidang->id }}">{{ $bidang->nama_bidang }}</label>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+
+    {{-- Tipe Keahlian --}}
+    <div class="mb-3">
+        <label class="form-label fw-semibold">Pilih Tipe Keahlian Anda:</label>
+        <div class="row">
+            @foreach($tipeKeahlian as $tipe)
+                <div class="col-md-4">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="tipe_keahlian[]" value="{{ $tipe->id }}" id="tipe_{{ $tipe->id }}">
+                        <label class="form-check-label" for="tipe_{{ $tipe->id }}">{{ $tipe->nama_tipe }}</label>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+
 
         {{-- INFORMASI TAMBAHAN --}}
         <div class="mb-4">
@@ -136,6 +171,8 @@
                 </div>
             </div>
         </div>
+
+        
 
         <div class="mt-4 text-end">
             <button type="submit" class="btn btn-primary px-5 py-2 rounded-pill shadow fw-semibold">

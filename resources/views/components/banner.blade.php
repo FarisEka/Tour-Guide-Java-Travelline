@@ -11,7 +11,9 @@
             temukan guide terbaik sesuai kebutuhan Anda
             </p>
             <div class="d-flex justify-content-center gap-2 mt-3">
+        <a href="{{ route('tour-guide.create') }}">
             <button type="button" class="btn btn-info fw-medium">Daftar Sekarang</button>
+        </a>
             <button type="button" class="btn btn-outline-info fw-medium">Cari Tour Guide</button>
             </div>
         </div>

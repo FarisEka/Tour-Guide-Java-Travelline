@@ -30,8 +30,7 @@
         @endphp
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
-                <img src="{{ asset('storage/foto/' . $foto) }}" class="rounded-circle me-2" width="35" height="35" style="object-fit: cover;">
-                <span class="text-black">{{ Auth::user()->name }}</span>
+                <img src="{{ asset('storage/' . $foto) }}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; object-position: center; margin-top: -4px;">
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="">Profil</a></li>
