@@ -9,16 +9,16 @@
 
     <div class="card p-3">
         @foreach ($tourGuides as $guide)
-            <div class="d-flex align-items-center py-3 border-bottom">
-                <img src="{{ $guide->photo_url  }}" class="rounded-circle me-3" width="60" height="60" alt="Foto">
-                <div>
-                    <h5 class="mb-0 fw-semibold">{{ $guide->name }}</h5>
-                    <small class="text-muted">
-                        {{ $guide->status ?? $guide->city }}
-                    </small>
-                </div>
-            </div>
-        @endforeach
+    <div class="d-flex align-items-center py-3 border-bottom">
+        <img src="{{ asset('storage/' . $guide->foto) }}" class="rounded-circle me-3" width="60" height="60" alt="Foto">
+        <div>
+            <h5 class="mb-0 fw-semibold">{{ $guide->user->nama_lengkap }}</h5>
+            <small class="text-muted">
+                {{ ucfirst($guide->status_verifikasi) }} &mdash; {{ $guide->domisili_hpi }}
+            </small>
+        </div>
+    </div>
+@endforeach
     </div>
 
 </div>

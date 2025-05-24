@@ -19,17 +19,17 @@
     <div class="card p-4 shadow-sm">
         <div class="row mb-4">
             <div class="col-md-2">
-                <img src="{{ $guide->photo_url }}" alt="{{ $guide->name }}" class="img-fluid rounded-circle">
+                <img src="{{ asset('storage/' . $guide->foto) }}" alt="{{ $guide->user->nama_lengkap }}" class="img-fluid rounded-circle">
             </div>
             <div class="col-md-10">
-                <h4><strong>{{ $guide->name }}</strong></h4>
-                <p><strong>Alamat:</strong> {{ $guide->address }}</p>
-                <p><strong>Usia:</strong> {{ $guide->age }}</p>
-                <p><strong>Tempat, Tanggal Lahir:</strong> {{ $guide->birth_place }}, {{ $guide->birth_date }}</p>
-                <p><strong>Nomor Telepon:</strong> {{ $guide->phone }}</p>
-                <p><strong>Domisili HPI:</strong> {{ $guide->domicile }}</p>
-                <p><strong>Nomor Lisensi:</strong> {{ $guide->license_number }}</p>
-                <p><strong>Tanggal Aktif Lisensi:</strong> {{ $guide->license_active_date }}</p>
+                <h4><strong>{{ $guide->user->nama_lengkap }}</strong></h4>
+                <p><strong>Alamat:</strong> {{ $guide->alamat }}</p>
+                <p><strong>Usia:</strong> {{ \Carbon\Carbon::parse($guide->tanggal_lahir)->age }} tahun</p>
+                <p><strong>Tempat, Tanggal Lahir:</strong> {{ $guide->tempat_lahir }}, {{ \Carbon\Carbon::parse($guide->tanggal_lahir)->format('d M Y') }}</p>
+                <p><strong>Nomor Telepon:</strong> {{ $guide->user->telepon }}</p>
+                <p><strong>Domisili HPI:</strong> {{ $guide->domisili_hpi }}</p>
+                <p><strong>Nomor Lisensi:</strong> {{ $guide->nomor_lisensi }}</p>
+                <p><strong>Tanggal Aktif Lisensi:</strong> {{ \Carbon\Carbon::parse($guide->tanggal_aktif_lisensi)->format('d M Y') }}</p>
             </div>
         </div>
 
@@ -37,13 +37,13 @@
 
         <div class="row">
             <div class="col-md-6">
-                <p><strong>Waktu Guiding:</strong> {{ $guide->guiding_time }}</p>
+                <p><strong>Waktu Guiding:</strong> {{ $guide->waktu_guiding }}</p>
                 <p><strong>Bidang Keahlian:</strong> {{ $guide->bidangKeahlian->pluck('nama')->join(', ') }}</p>
-                <p><strong>Destinasi Sering Dikunjungi:</strong> {{ $guide->frequent_destinations }}</p>
+                <p><strong>Destinasi Sering Dikunjungi:</strong> {{ $guide->destinasi_sering_dikunjungi }}</p>
             </div>
             <div class="col-md-6">
                 <p><strong>Tipe Keahlian:</strong> {{ $guide->tipeKeahlian->pluck('nama')->join(', ') }}</p>
-                <p><strong>Pengalaman:</strong> {{ $guide->experience_years }} tahun</p>
+                <p><strong>Pengalaman:</strong> {{ $guide->tahun_pengalaman }} tahun</p>
             </div>
         </div>
     </div>

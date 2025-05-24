@@ -10,41 +10,21 @@ class TourGuideController extends Controller
 {
     public function index()
     {
-        $tourGuides = [
-            (object) ['name' => 'Agus Santoso', 'city' => 'Surabaya', 'photo_url' => 'https://i.pravatar.cc/150?img=1'],
-            (object) ['name' => 'Rina Putri', 'status' => 'Menunggu Verifikasi', 'photo_url' => 'https://i.pravatar.cc/150?img=2'],
-            (object) ['name' => 'Dewi Kartika', 'status' => 'Terverifikasi', 'photo_url' => 'https://i.pravatar.cc/150?img=3'],
-        ];
+        $tourGuides = TourGuideProfiles::with('user')->get();
 
         return view('admin.tour-guides.index', compact('tourGuides'));
     }
 
     public function pending()
     {
-        // Data dummy manual
-        $pendingGuides = [
-            (object) [
-                'id' => 1,
-                'name' => 'Fajar Rahman',
-                'city' => 'Malang',
-                'photo_url' => 'https://i.pravatar.cc/150?img=1' // gambar random
-            ],
-            (object) [
-                'id' => 2,
-                'name' => 'Dewi Lestari',
-                'city' => 'Bandung',
-                'photo_url' => 'https://i.pravatar.cc/150?img=2'
-            ],
-        ];
+        $pendingGuides = TourGuideProfiles::with('user')
+            ->where('status_verifikasi', 'menunggu')
+            ->get();
         return view('admin.tour-guides.pending', compact('pendingGuides'));
         // $pendingGuides = TourGuideProfiles::where('status_verifikasi', 'menunggu')->get();
         // return view('admin.tour-guides.pending', compact('pendingGuides'));
     }
 
-    // public function detail()
-    // {
-    //     return view('admin.tour-guides.detail', compact('detailGuides'));
-    // }
 
     public function show($id)
     {
@@ -52,10 +32,26 @@ class TourGuideController extends Controller
         return view('admin.tour-guides.detail', compact('guide'));
     }
 
+    public function verifyGuide($id)
+    {
+        $guide = TourGuideProfile::findOrFail($id);
+        $guide->status_verifikasi = 'terverifikasi';
+        $guide->save();
+        return view('admin.tour-guides.verify', compact('guide'));
+    }
+
+    public function rejectGuide($id)
+    {
+        $guide = TourGuideProfile::findOrFail($id);
+        $guide->status_verifikasi = 'ditolak';
+        $guide->save();
+        return view('admin.tour-guides.reject', compact('guide'));
+    }
+
     public function user()
-{
-    return $this->belongsTo(User::class, 'user_id');
-}
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
 
     public function bidangKeahlian()

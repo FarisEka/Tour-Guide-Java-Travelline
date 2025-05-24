@@ -62,13 +62,13 @@
                     @forelse ($latestGuides as $index => $guide)
                     <tr>
                         <td>{{ $index + 1 }}</td>
-                        <td>{{ $guide->name }}</td>
-                        <td>{{ $guide->phone }}</td>
+                        <td>{{ $guide->nama_lengkap }}</td>
+                        <td>{{ $guide->no_telepon }}</td>
                         <td>
-                            @if ($guide->status === 'verified')
-                                <span class="badge bg-success">Verified</span>
+                            @if ($guide->status_verifikasi === 'terverifikasi')
+                                <span class="badge bg-success">Terverifikasi</span>
                             @else
-                                <span class="badge bg-warning text-dark">Pending</span>
+                                <span class="badge bg-warning text-dark">Menunggu</span>
                             @endif
                         </td>
                     </tr>

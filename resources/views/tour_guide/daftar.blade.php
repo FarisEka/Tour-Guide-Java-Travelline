@@ -44,7 +44,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="domisili_hpi" class="form-label fw-semibold">Domisili HPI</label>
-                    <input type="text" class="form-control fw-semibold" name="domisili_hpi" id="domisili_hpi" required>
+                    <input type="text" class="form-control" name="domisili_hpi" id="domisili_hpi" required>
                 </div>
                 <div class="col-md-6">
                     <label for="foto" class="form-label fw-semibold">Upload Foto (.jpg/.jpeg/.png, maks 2MB)</label>

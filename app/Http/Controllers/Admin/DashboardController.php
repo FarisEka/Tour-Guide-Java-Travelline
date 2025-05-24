@@ -3,21 +3,46 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\TourGuideProfiles;
+use App\Models\Booking;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        return view('admin.dashboard', [
-    'totalGuides' => 120,
-    'pendingGuides' => 15,
-    'verifiedGuides' => 105,
-    'totalBookings' => 42,
-    'latestGuides' => [
-        (object)['name' => 'Agus Santoso', 'phone' => '081234567890', 'status' => 'pending'],
-        (object)['name' => 'Rina Widya', 'phone' => '089876543210', 'status' => 'verified'],
-    ],
-]);
+        // Total semua tour guide yang mendaftar
+        $totalGuides = TourGuideProfiles::count();
+
+        // Jumlah yang status_verifikasi masih 'menunggu'
+        $pendingGuides = TourGuideProfiles::where('status_verifikasi', 'menunggu')->count();
+
+        // Jumlah yang sudah 'terverifikasi'
+        $verifiedGuides = TourGuideProfiles::where('status_verifikasi', 'terverifikasi')->count();
+
+        // Total booking
+        $totalBookings = Booking::count();
+
+        // 5 tour guide terbaru
+        $latestGuides = TourGuideProfiles::with('user')
+            ->latest()
+            ->take(5)
+            ->get()
+            ->map(function ($guide) {
+                return (object) [
+                    'nama_lengkap' => $guide->user->nama_lengkap ?? '-',
+                    'no_telepon' => $guide->no_telepon ?? '-',
+                    'status_verifikasi' => $guide->status_verifikasi ?? '-',
+                ];
+            });
+
+        return view('admin.dashboard', compact(
+            'totalGuides',
+            'pendingGuides',
+            'verifiedGuides',
+            'totalBookings',
+            'latestGuides'
+        ));
     }
 }
