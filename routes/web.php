@@ -33,8 +33,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/tour-guides', [AdminTourGuideController::class, 'index'])->name('tour-guides.index');
     Route::get('/tour-guides/menunggu-verifikasi', [AdminTourGuideController::class, 'pending'])->name('tour-guides.pending');
     Route::get('/tour-guides/menunggu-verifikasi/detail', [AdminTourGuideController::class, 'detail'])->name('tour-guides.detail');
-    Route::post('/tour-guides/{id}/verify', [AdminTourGuideController::class, 'verify'])->name('tour-guides.verify');
-    Route::post('/tour-guides/{id}/reject', [AdminTourGuideController::class, 'reject'])->name('tour-guides.reject');
+    Route::post('/tour-guides/{id}/verify', [AdminTourGuideController::class, 'verifyGuide'])->name('tour-guides.verify');
+    Route::post('/tour-guides/{id}/reject', [AdminTourGuideController::class, 'rejectGuide'])->name('tour-guides.reject');
     Route::get('/tour-guides/terverifikasi', [AdminTourGuideController::class, 'terverifikasi'])->name('tour-guides.terverifikasi');
     Route::get('/tour-guides/{id}', [AdminTourGuideController::class, 'show'])->name('tour-guides.detail');
 

@@ -34,18 +34,20 @@ class TourGuideController extends Controller
 
     public function verifyGuide($id)
     {
-        $guide = TourGuideProfile::findOrFail($id);
-        $guide->status_verifikasi = 'terverifikasi';
-        $guide->save();
-        return view('admin.tour-guides.verify', compact('guide'));
+        $guide = TourGuideProfiles::findOrFail($id);
+    $guide->status_verifikasi = 'terverifikasi';
+    $guide->save();
+
+    return redirect()->back()->with('success', 'Tour guide berhasil diverifikasi.');
     }
 
     public function rejectGuide($id)
     {
-        $guide = TourGuideProfile::findOrFail($id);
-        $guide->status_verifikasi = 'ditolak';
-        $guide->save();
-        return view('admin.tour-guides.reject', compact('guide'));
+        $guide = TourGuideProfiles::findOrFail($id);
+    $guide->status_verifikasi = 'ditolak';
+    $guide->save();
+
+    return redirect()->back()->with('success', 'Tour guide telah ditolak.');
     }
 
     public function user()
