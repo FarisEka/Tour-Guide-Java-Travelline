@@ -27,7 +27,7 @@
 
     <div class="d-inline-flex align-items-center px-4 py-3 border rounded-pill" style="background-color: #ffffff;">
       <span class="me-3">Sudah 50+ guide bergabung bersama Java</span>
-      <a href="#" class="btn btn-info btn-sm text-white rounded-pill px-3 fw-medium">Lihat Tour Guide</a>
+      <a href="{{ route ('cari.guide') }}" class="btn btn-info btn-sm text-white rounded-pill px-3 fw-medium">Lihat Tour Guide</a>
     </div>
   </div>
 </section>
