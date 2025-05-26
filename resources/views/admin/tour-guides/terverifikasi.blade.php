@@ -33,7 +33,8 @@
                         <option value="Religious and Pilgrimage Tour" {{ request('bidang_keahlian') == 'Religious and Pilgrimage Tour' ? 'selected' : '' }}>Religious and Pilgrimage Tour</option>
                         <option value="Educational Tour" {{ request('bidang_keahlian') == 'Educational Tour' ? 'selected' : '' }}>Educational Tour
                         </option>
-                        <option value="Shopping Tour" {{ request('bidang_keahlian') == 'Shopping Tour' ? 'selected' : '' }}>Shopping Tour
+                        <option value="Shopping Tour" {{ request('bidang_keahlian') == 'Shopping Tour' ? 'selected' : '' }}>
+                            Shopping Tour
                         </option>
                     </select>
                 </div>
@@ -46,6 +47,7 @@
                         <option value="Group" {{ request('tipe_keahlian') == 'Group' ? 'selected' : '' }}>Group</option>
                         <option value="Family" {{ request('tipe_keahlian') == 'Family' ? 'selected' : '' }}>Family</option>
                         <option value="Private" {{ request('tipe_keahlian') == 'Private' ? 'selected' : '' }}>Private</option>
+                        <option value="Luxury" {{ request('tipe_keahlian') == 'Luxury' ? 'selected' : '' }}>Luxury</option>
                         <option value="Couple" {{ request('tipe_keahlian') == 'Couple' ? 'selected' : '' }}>Couple</option>
                     </select>
                 </div>
@@ -54,6 +56,7 @@
                 <div class="col-md-3 d-flex align-items-end">
                     <button type="submit" class="btn btn-primary">Filter</button>
                 </div>
+            </div>
         </form>
     </div>
 
@@ -75,7 +78,7 @@
                     <tr>
                         <td>{{ $guide->user->nama_lengkap ?? '-' }}</td>
                         <td>{{ $guide->user->email }}</td>
-                <td>{{ $guide->no_telepon }}</td>
+                        <td>{{ $guide->no_telepon }}</td>
                         <td>
                             {{ $guide->domisili_hpi }}
                         </td>

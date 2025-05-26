@@ -14,7 +14,9 @@
         <a href="{{ route('tour-guide.create') }}">
             <button type="button" class="btn btn-info fw-medium">Daftar Sekarang</button>
         </a>
+        <a href="{{ route('cari.guide') }}">
             <button type="button" class="btn btn-outline-info fw-medium">Cari Tour Guide</button>
+        </a>
             </div>
         </div>
     </div>

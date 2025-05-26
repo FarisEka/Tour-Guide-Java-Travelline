@@ -12,7 +12,7 @@
             </a>
             <ul class="navbar-nav fw-medium">
                 <li class="nav-item me-5">
-        <a class="nav-link text-black hover-bg" aria-current="page" href="#">Cari Tour Guide</a>
+        <a class="nav-link text-black hover-bg" aria-current="page" href="{{ route('cari.guide') }}">Cari Tour Guide</a>
     </li>
     <li class="nav-item me-5">
         <a class="nav-link text-black hover-bg" href="{{ route('tour-guide.create') }}">Daftar Sebagai Tour Guide</a>

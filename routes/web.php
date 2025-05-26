@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\TourGuideController as AdminTourGuideController;
 use App\Http\Controllers\Guide\DashboardController as GuideDashboardController;
 use App\Http\Controllers\TourGuideRegistrationController;
+use App\Http\Controllers\TourGuidePublicController;
+
 
 
 Route::get('/test-login-route', function () {
@@ -15,8 +17,8 @@ Route::get('/test-login-route', function () {
 // PUBLIC ROUTES (Untuk traveller, tanpa login)
 //
 Route::view('/', 'traveller.home')->name('home');
-Route::view('/booking', 'traveller.booking')->name('booking');
-Route::view('/search', 'traveller.search')->name('search');
+Route::get('/cari-guide', [TourGuidePublicController::class, 'cari'])->name('cari.guide');
+
 
 //
 // GUIDE ROUTES (Untuk tour guide setelah login)
