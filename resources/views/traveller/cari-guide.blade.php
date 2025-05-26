@@ -68,7 +68,7 @@
 
                         <div class="mt-4">
                             @auth
-                                <a href="{{ route('booking.form', $tourGuide->user->id) }}"
+                                <a href="{{ route('booking.form', $tourGuide->id) }}"
                                     class="btn btn-primary w-100 rounded-pill fw-semibold shadow-sm">
                                     Ajukan Permintaan
                                 </a>
