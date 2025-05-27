@@ -23,6 +23,6 @@ class Booking extends Model
 
     public function tourGuide()
     {
-        return $this->belongsTo(TourGuideProfile::class, 'id_guide');
+        return $this->belongsTo(TourGuideProfiles::class, 'id_guide');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\TourGuideProfiles;
+use App\Models\Booking;
 use Illuminate\Http\Request;
 
 class TourGuideController extends Controller
@@ -35,19 +36,19 @@ class TourGuideController extends Controller
     public function verifyGuide($id)
     {
         $guide = TourGuideProfiles::findOrFail($id);
-    $guide->status_verifikasi = 'terverifikasi';
-    $guide->save();
+        $guide->status_verifikasi = 'terverifikasi';
+        $guide->save();
 
-    return redirect()->back()->with('success', 'Tour guide berhasil diverifikasi.');
+        return redirect()->back()->with('success', 'Tour guide berhasil diverifikasi.');
     }
 
     public function rejectGuide($id)
     {
         $guide = TourGuideProfiles::findOrFail($id);
-    $guide->status_verifikasi = 'ditolak';
-    $guide->save();
+        $guide->status_verifikasi = 'ditolak';
+        $guide->save();
 
-    return redirect()->back()->with('success', 'Tour guide telah ditolak.');
+        return redirect()->back()->with('success', 'Tour guide telah ditolak.');
     }
 
     public function user()
@@ -88,6 +89,26 @@ class TourGuideController extends Controller
             ->get();
 
         return view('admin.tour-guides.terverifikasi', compact('guides'));
+    }
+
+    public function totalBooking(Request $request)
+    {
+        $bookings = Booking::with(['tourGuide.user'])
+            ->when($request->traveller, function ($query, $traveller) {
+                $query->where('nama_traveller', 'like', '%' . $traveller . '%');
+            })
+            ->when($request->guide, function ($query, $guide) {
+                $query->whereHas('tourGuide.user', function ($q) use ($guide) {
+                    $q->where('nama_lengkap', 'like', '%' . $guide . '%');
+                });
+            })
+            ->when($request->tanggal, function ($query, $tanggal) {
+                $query->whereDate('tanggal_booking', $tanggal);
+            })
+            ->latest()
+            ->get();
+
+        return view('admin.tour-guides.total-booking', compact('bookings'));
     }
 
 

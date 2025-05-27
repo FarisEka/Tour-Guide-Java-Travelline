@@ -36,12 +36,14 @@
             </a>
         </div>
         <div class="col-md-3 mb-3">
+            <a href="{{ route('admin.tour-guides.total-booking') }}" class="text-decoration-none">
             <div class="card text-white bg-danger">
                 <div class="card-body">
                     <div class="small">Total Booking</div>
                     <div class="h4 fw-bold">{{ $totalBookings }}</div>
                 </div>
             </div>
+            </a>
         </div>
     </div>
 
