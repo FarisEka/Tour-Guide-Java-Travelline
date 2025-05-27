@@ -44,7 +44,7 @@
                                 @if (Auth::user()->tourGuideProfile)
                                     <li>
                                         <a class="dropdown-item"
-                                            href="#">
+                                            href="{{ route ('profile.edit-biodata') }}">
                                             Edit Biodata
                                         </a>
                                     </li>

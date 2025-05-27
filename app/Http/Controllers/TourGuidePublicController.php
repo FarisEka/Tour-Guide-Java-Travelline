@@ -39,4 +39,60 @@ class TourGuidePublicController extends Controller
         return view('traveller.cari-guide', compact('tourGuides', 'bidangs', 'tipes'));
     }
 
+    public function edit()
+{
+    $user = Auth::user();
+    $profile = $user->tourGuideProfile;
+
+    return view('profile.edit-biodata', compact('profile'));
+}
+
+public function update(Request $request)
+{
+    $request->validate([
+        'alamat' => 'required|string',
+        'usia' => 'required|integer|min:17|max:100',
+        'tempat_lahir' => 'required|string|max:100',
+        'tanggal_lahir' => 'required|date',
+        'bahasa' => 'nullable|string|max:100',
+        'no_telepon' => 'nullable|string|max:20',
+        'domisili_hpi' => 'required|string|max:100',
+        'no_lisensi' => 'nullable|string|max:100',
+        'tanggal_aktif_lisensi' => 'nullable|date',
+        'sertifikasi_bahasa' => 'nullable|string',
+        'waktu_guiding' => 'nullable|in:penuh waktu,setiap weekend',
+        'destinasi_sering' => 'nullable|string',
+        'jumlah_tamu_max' => 'nullable|integer',
+        'lama_bertugas' => 'nullable|integer',
+        'alasan_profesi' => 'nullable|string',
+        'pelatihan' => 'nullable|string',
+        'travel_agency' => 'nullable|string',
+        'pengalaman_berkesan' => 'nullable|string',
+        'pengalaman_komplain' => 'nullable|string',
+        'menyikapi_komplain' => 'nullable|string',
+        'menyiasati_hambatan' => 'nullable|string',
+        'rencana_meningkatkan_layanan' => 'nullable|string',
+        'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+    ]);
+
+    $user = Auth::user();
+    $profile = $user->tourGuideProfile;
+
+    if ($request->hasFile('foto')) {
+        if ($profile->foto) {
+            Storage::delete('public/foto/' . $profile->foto);
+        }
+
+        $file = $request->file('foto');
+        $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+        $file->storeAs('public/foto', $filename);
+        $profile->foto = $filename;
+    }
+
+    $profile->update($request->except('foto'));
+
+    return redirect()->route('profile.edit-biodata')->with('success', 'Biodata berhasil diperbarui.');
+}
+
+
 }

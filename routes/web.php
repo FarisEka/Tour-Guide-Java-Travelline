@@ -55,6 +55,8 @@ Route::middleware('auth')->group(function () {
      Route::get('/booking-masuk', [BookingController::class, 'masuk'])->name('booking.masuk');
     Route::post('/booking/{id}/setujui', [BookingController::class, 'setujui'])->name('booking.setujui');
     Route::post('/booking/{id}/tolak', [BookingController::class, 'tolak'])->name('booking.tolak');
+    Route::get('/edit-biodata', [TourGuidePublicController::class, 'edit'])->name('profile.edit-biodata');
+    Route::put('/update-biodata', [TourGuidePublicController::class, 'update'])->name('profile.update-biodata');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
