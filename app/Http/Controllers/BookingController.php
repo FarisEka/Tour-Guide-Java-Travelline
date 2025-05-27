@@ -19,24 +19,24 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'tour_guide_id' => 'required|exists:tour_guide_profiles,id',
+            'id_guide' => 'required|exists:tour_guide_profiles,id',
             'nama_traveller' => 'required|string|max:255',
             'email' => 'required|email',
             'no_hp' => 'required|string|max:20',
             'tanggal_booking' => 'required|date',
-            'durasi' => 'required|numeric|min:1',
+            'durasi_hari' => 'required|numeric|min:1',
         ]);
 
         Booking::create([
-            'tour_guide_id' => $request->tour_guide_id,
+            'id_guide' => $request->id_guide,
             'user_id' => Auth::id(),
             'nama_traveller' => $request->nama_traveller,
             'email' => $request->email,
             'no_hp' => $request->no_hp,
             'tanggal_booking' => $request->tanggal_booking,
-            'durasi' => $request->durasi,
+            'durasi_hari' => $request->durasi_hari,
         ]);
 
-        return redirect()->route('cari.guide')->with('success', 'Permintaan booking berhasil dikirim!');
+        return redirect()->route('cari.guide')->with('success', 'Permintaan booking berhasil dikirim! Tunggu verifikasi dari tour guide');
     }
 }

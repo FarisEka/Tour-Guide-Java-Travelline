@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container py-4">
+    
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow rounded-4">
@@ -14,7 +15,7 @@
 
                     <form action="{{ route('booking.store') }}" method="POST">
                         @csrf
-                        <input type="hidden" name="tour_guide_id" value="{{ $tourGuide->id }}">
+                        <input type="hidden" name="id_guide" value="{{ $tourGuide->id }}">
 
                         <div class="mb-3">
                             <label for="nama_traveller" class="form-label">Nama Anda</label>
@@ -44,7 +45,7 @@
 
                             <div class="col-md-6 mb-3">
                                 <label for="durasi" class="form-label">Durasi (hari)</label>
-                                <input type="number" name="durasi" class="form-control" min="1" required>
+                                <input type="number" name="durasi_hari" class="form-control" min="1" required>
                             </div>
                         </div>
 

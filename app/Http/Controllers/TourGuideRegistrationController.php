@@ -95,7 +95,7 @@ class TourGuideRegistrationController extends Controller
 
             DB::commit();
 
-            return redirect()->route('home')->with('status', 'Pendaftaran tour guide berhasil dikirim! Tunggu datamu diverifikasi oleh admin.');
+            return redirect()->route('home')->with('success', 'Pendaftaran tour guide berhasil dikirim! Tunggu datamu diverifikasi oleh admin.');
         } catch (\Exception $e) {
             DB::rollback();
 
