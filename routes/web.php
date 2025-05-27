@@ -52,6 +52,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/daftar-tour-guide', [TourGuideRegistrationController::class, 'store'])->name('tour-guide.store');
      Route::get('/booking/{id}', [BookingController::class, 'create'])->name('booking.form');
     Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
+     Route::get('/booking-masuk', [BookingController::class, 'masuk'])->name('booking.masuk');
+    Route::post('/booking/{id}/setujui', [BookingController::class, 'setujui'])->name('booking.setujui');
+    Route::post('/booking/{id}/tolak', [BookingController::class, 'tolak'])->name('booking.tolak');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

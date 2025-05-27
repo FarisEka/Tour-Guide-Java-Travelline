@@ -39,4 +39,32 @@ class BookingController extends Controller
 
         return redirect()->route('cari.guide')->with('success', 'Permintaan booking berhasil dikirim! Tunggu verifikasi dari tour guide');
     }
+
+    public function masuk()
+    {
+    $profile = TourGuideProfiles::where('user_id', Auth::id())->first();
+
+    if (!$profile) {
+        abort(404, 'Profil tour guide tidak ditemukan.');
+    }
+
+    $bookings = Booking::where('id_guide', $profile->id)
+    ->where('status', 'pending')
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+    return view('profile.booking-masuk', compact('bookings'));
+}
+
+    public function setujui($id)
+    {
+        Booking::where('id', $id)->update(['status' => 'disetujui']);
+        return back()->with('success', 'Booking disetujui.');
+    }
+
+    public function tolak($id)
+    {
+        Booking::where('id', $id)->update(['status' => 'ditolak']);
+        return back()->with('success', 'Booking ditolak.');
+    }
 }
