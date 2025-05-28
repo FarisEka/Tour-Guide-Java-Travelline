@@ -40,59 +40,65 @@ class TourGuidePublicController extends Controller
     }
 
     public function edit()
-{
-    $user = Auth::user();
-    $profile = $user->tourGuideProfile;
+    {
+        $user = Auth::user();
+        $profile = $user->tourGuideProfile;
 
-    return view('profile.edit-biodata', compact('profile'));
-}
-
-public function update(Request $request)
-{
-    $request->validate([
-        'alamat' => 'required|string',
-        'usia' => 'required|integer|min:17|max:100',
-        'tempat_lahir' => 'required|string|max:100',
-        'tanggal_lahir' => 'required|date',
-        'bahasa' => 'nullable|string|max:100',
-        'no_telepon' => 'nullable|string|max:20',
-        'domisili_hpi' => 'required|string|max:100',
-        'no_lisensi' => 'nullable|string|max:100',
-        'tanggal_aktif_lisensi' => 'nullable|date',
-        'sertifikasi_bahasa' => 'nullable|string',
-        'waktu_guiding' => 'nullable|in:penuh waktu,setiap weekend',
-        'destinasi_sering' => 'nullable|string',
-        'jumlah_tamu_max' => 'nullable|integer',
-        'lama_bertugas' => 'nullable|integer',
-        'alasan_profesi' => 'nullable|string',
-        'pelatihan' => 'nullable|string',
-        'travel_agency' => 'nullable|string',
-        'pengalaman_berkesan' => 'nullable|string',
-        'pengalaman_komplain' => 'nullable|string',
-        'menyikapi_komplain' => 'nullable|string',
-        'menyiasati_hambatan' => 'nullable|string',
-        'rencana_meningkatkan_layanan' => 'nullable|string',
-        'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-    ]);
-
-    $user = Auth::user();
-    $profile = $user->tourGuideProfile;
-
-    if ($request->hasFile('foto')) {
-        if ($profile->foto) {
-            Storage::delete('public/foto/' . $profile->foto);
-        }
-
-        $file = $request->file('foto');
-        $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-        $file->storeAs('public/foto', $filename);
-        $profile->foto = $filename;
+        return view('profile.edit-biodata', compact('profile'));
     }
 
-    $profile->update($request->except('foto'));
+    public function update(Request $request)
+    {
+        $request->validate([
+            'nama_lengkap' => 'required|string|max:255',
+            'usia' => 'required|integer',
+            'tanggal_lahir' => 'required|date',
+            'tempat_lahir' => 'required|string|max:255',
+            'alamat' => 'required|string|max:255',
+            'domisili_hpi' => 'required|string|max:255',
+            'lisensi' => 'required|string|max:255',
+            'tanggal_aktif_lisensi' => 'required|date',
+            'bahasa' => 'required|string|max:255',
+            'sertifikasi_bahasa' => 'nullable|string|max:255',
+            'no_telepon' => 'required|string|max:20',
+            'waktu_guiding' => 'required|in:penuh waktu,setiap weekend',
+            'alasan_profesi' => 'required|string',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
 
-    return redirect()->route('profile.edit-biodata')->with('success', 'Biodata berhasil diperbarui.');
-}
+        $user = auth()->user();
+        $user->nama_lengkap = $request->nama_lengkap;
+        $user->save();
+
+        $profile = $user->tourGuideProfile;
+
+        if ($request->hasFile('foto')) {
+            // Hapus foto lama jika ada
+            if ($profile->foto) {
+                Storage::delete('public/' . $profile->foto);
+            }
+
+            $path = $request->file('foto')->store('foto-profil', 'public');
+            $profile->foto = $path;
+        }
+
+        $profile->update([
+            'usia' => $request->usia,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'tempat_lahir' => $request->tempat_lahir,
+            'alamat' => $request->alamat,
+            'domisili_hpi' => $request->domisili_hpi,
+            'no_lisensi' => $request->lisensi,
+            'tanggal_aktif_lisensi' => $request->tanggal_aktif_lisensi,
+            'bahasa' => $request->bahasa,
+            'sertifikasi_bahasa' => $request->sertifikasi_bahasa,
+            'no_telepon' => $request->no_telepon,
+            'waktu_guiding' => $request->waktu_guiding,
+            'alasan_profesi' => $request->alasan_profesi,
+        ]);
+
+        return redirect()->back()->with('success', 'Biodata berhasil diperbarui.');
+    }
 
 
 }

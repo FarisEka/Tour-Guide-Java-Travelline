@@ -49,7 +49,7 @@
         <div class="d-flex align-items-start">
           <i class="fas fa-shield-alt fa-2x text-info me-3"></i>
           <div>
-            <div class="fw-medium">Verifikasi & Notifikasi Otomatis</div>
+            <div class="fw-medium">Verifikasi Oleh Admin</div>
           </div>
         </div>
       </div>
