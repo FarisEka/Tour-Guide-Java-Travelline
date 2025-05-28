@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\TourGuideProfiles;
+use App\Models\User;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 
@@ -39,7 +40,7 @@ class TourGuideController extends Controller
         $guide->status_verifikasi = 'terverifikasi';
         $guide->save();
 
-        return redirect()->back()->with('success', 'Tour guide berhasil diverifikasi.');
+        return redirect()->route('admin.tour-guides.pending')->with('success', 'Tour guide berhasil diverifikasi.');
     }
 
     public function rejectGuide($id)
@@ -48,7 +49,7 @@ class TourGuideController extends Controller
         $guide->status_verifikasi = 'ditolak';
         $guide->save();
 
-        return redirect()->back()->with('success', 'Tour guide telah ditolak.');
+        return redirect()->route('admin.tour-guides.pending')->with('success', 'Tour guide telah ditolak.');
     }
 
     public function user()
@@ -111,6 +112,32 @@ class TourGuideController extends Controller
         return view('admin.tour-guides.total-booking', compact('bookings'));
     }
 
+    public function destroy($user_id)
+{
+    $user = User::findOrFail($user_id);
+
+    // Hapus relasi profile, bidang & tipe keahlian
+    if ($user->tourGuideProfile) {
+        $profile = $user->tourGuideProfile;
+
+        // Hapus foto jika ada
+        if ($profile->foto) {
+            Storage::delete('public/' . $profile->foto);
+        }
+
+        // Hapus pivot bidang_keahlian dan tipe_keahlian
+        $profile->bidangKeahlian()->detach();
+        $profile->tipeKeahlian()->detach();
+
+        // Hapus profile
+        $profile->delete();
+    }
+
+    // Hapus akun user
+    $user->delete();
+
+    return redirect()->route('admin.tour-guides.terverifikasi')->with('success', 'Tour guide berhasil dihapus.');
+}
 
 
 }

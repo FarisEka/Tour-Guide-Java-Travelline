@@ -71,6 +71,7 @@
                     <th>Domisili</th>
                     <th>Bidang Keahlian</th>
                     <th>Tipe Keahlian</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -92,6 +93,15 @@
                                 <span class="badge bg-info text-dark">{{ $tipe->nama_tipe }}</span>
                             @endforeach
                         </td>
+                        <td>
+                            <form action="{{ route('admin.tour-guides.destroy', $guide->user_id) }}" method="POST"
+                                onsubmit="return confirm('Yakin ingin menghapus tour guide ini beserta akun user-nya?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                            </form>
+                        </td>
+
                     </tr>
                 @empty
                     <tr>

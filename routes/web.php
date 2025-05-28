@@ -39,6 +39,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::post('/tour-guides/{id}/verify', [AdminTourGuideController::class, 'verifyGuide'])->name('tour-guides.verify');
     Route::post('/tour-guides/{id}/reject', [AdminTourGuideController::class, 'rejectGuide'])->name('tour-guides.reject');
     Route::get('/tour-guides/terverifikasi', [AdminTourGuideController::class, 'terverifikasi'])->name('tour-guides.terverifikasi');
+    Route::delete('/tour-guides/{user}', [AdminTourGuideController::class, 'destroy'])->name('tour-guides.destroy');
     Route::get('/tour-guides/{id}', [AdminTourGuideController::class, 'show'])->name('tour-guides.detail');
     Route::get('/total-booking', [AdminTourGuideController::class, 'totalBooking'])->name('tour-guides.total-booking');
 
