@@ -73,6 +73,11 @@ class TourGuideController extends Controller
     {
         $guides = TourGuideProfiles::with(['user', 'bidangKeahlian', 'tipeKeahlian'])
             ->where('status_verifikasi', 'terverifikasi')
+            ->when($request->nama, function ($q) use ($request) {
+                $q->whereHas('user', function ($subQuery) use ($request) {
+                    $subQuery->where('nama_lengkap', 'like', '%' . $request->nama . '%');
+                });
+            })
             ->when($request->domisili, function ($q) use ($request) {
                 $q->where('domisili_hpi', 'like', '%' . $request->domisili . '%');
             })
@@ -113,31 +118,31 @@ class TourGuideController extends Controller
     }
 
     public function destroy($user_id)
-{
-    $user = User::findOrFail($user_id);
+    {
+        $user = User::findOrFail($user_id);
 
-    // Hapus relasi profile, bidang & tipe keahlian
-    if ($user->tourGuideProfile) {
-        $profile = $user->tourGuideProfile;
+        // Hapus relasi profile, bidang & tipe keahlian
+        if ($user->tourGuideProfile) {
+            $profile = $user->tourGuideProfile;
 
-        // Hapus foto jika ada
-        if ($profile->foto) {
-            Storage::delete('public/' . $profile->foto);
+            // Hapus foto jika ada
+            if ($profile->foto) {
+                Storage::delete('public/' . $profile->foto);
+            }
+
+            // Hapus pivot bidang_keahlian dan tipe_keahlian
+            $profile->bidangKeahlian()->detach();
+            $profile->tipeKeahlian()->detach();
+
+            // Hapus profile
+            $profile->delete();
         }
 
-        // Hapus pivot bidang_keahlian dan tipe_keahlian
-        $profile->bidangKeahlian()->detach();
-        $profile->tipeKeahlian()->detach();
+        // Hapus akun user
+        $user->delete();
 
-        // Hapus profile
-        $profile->delete();
+        return redirect()->route('admin.tour-guides.terverifikasi')->with('success', 'Tour guide berhasil dihapus.');
     }
-
-    // Hapus akun user
-    $user->delete();
-
-    return redirect()->route('admin.tour-guides.terverifikasi')->with('success', 'Tour guide berhasil dihapus.');
-}
 
 
 }

@@ -9,8 +9,15 @@
         </div>
 
         <form method="GET" action="{{ route('admin.tour-guides.terverifikasi') }}" class="flex flex-wrap gap-2 mb-4">
-            {{-- Input cari domisili --}}
+            {{-- Input cari nama --}}
             <div class="row">
+                <div class="col-md-3">
+                    <label for="nama" class="form-label">Nama</label>
+                    <input type="text" name="nama" id="nama" placeholder="Nama Lengkap"
+                        value="{{ request('nama') }}" class="form-control" />
+                </div>
+                
+            {{-- Input cari domisili --}}
                 <div class="col-md-3">
                     <label for="domisili" class="form-label">Domisili</label>
                     <input type="text" name="domisili" id="domisili" placeholder="Cari domisili..."
@@ -18,7 +25,7 @@
                 </div>
 
                 {{-- Bidang Keahlian --}}
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <label for="bidang_keahlian" class="form-label">Bidang Keahlian</label>
                     <select name="bidang_keahlian" id="bidang_keahlian" class="form-select">
                         <option value="">Pilih</option>
@@ -40,7 +47,7 @@
                 </div>
 
                 {{-- Tipe Keahlian --}}
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <label for="tipe_keahlian" class="form-label">Tipe Keahlian</label>
                     <select name="tipe_keahlian" id="tipe_keahlian" class="form-select">
                         <option value="">Pilih</option>
@@ -53,7 +60,7 @@
                 </div>
 
                 {{-- Tombol Filter --}}
-                <div class="col-md-3 d-flex align-items-end">
+                <div class="col-md-2 d-flex align-items-end">
                     <button type="submit" class="btn btn-primary">Filter</button>
                 </div>
             </div>

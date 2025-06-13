@@ -19,7 +19,7 @@
                         </a>
                     </li>
                     <li class="nav-item mb-3">
-                        <a href="#"
+                        <a href="{{ route ('profile.edit-biodata') }}"
                             class="nav-link text-dark d-flex align-items-center {{ request()->routeIs('profile.edit-biodata') ? 'active fw-bold bg-light rounded' : '' }}">
                             <i class="bi bi-pencil me-2"></i> Edit Biodata
                         </a>
