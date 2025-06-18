@@ -70,7 +70,7 @@
                 </div>
                 <div class="col-md-12">
                     <label for="sertifikasi_bahasa" class="form-label fw-semibold">Sertifikasi Bahasa Asing</label>
-                    <textarea class="form-control" name="sertifikasi_bahasa" id="sertifikasi_bahasa" rows="3" placeholder="(sebutkan tempat anda belajar bahasa tersebut dan dibutuhkan waktu berapa lama Anda menguasai bahasa tersebut"></textarea>
+                    <textarea class="form-control" name="sertifikasi_bahasa" id="sertifikasi_bahasa" rows="3" placeholder="(sebutkan tempat anda belajar bahasa tersebut dan dibutuhkan waktu berapa lama Anda menguasai bahasa tersebut" required></textarea>
                 </div>
                 <div class="col-md-12">
                     <label class="form-label d-block fw-semibold">Waktu Guiding Yang Disediakan</label>
@@ -79,7 +79,7 @@
                         <label class="form-check-label" for="penuh">Penuh Waktu</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="waktu_guiding" value="setiap weekend" id="weekend">
+                        <input class="form-check-input" type="radio" name="waktu_guiding" value="setiap weekend" id="weekend" required>
                         <label class="form-check-label" for="weekend">Setiap Weekend</label>
                     </div>
                 </div>
@@ -96,7 +96,7 @@
             @foreach($bidangKeahlian as $bidang)
                 <div class="col-md-4">
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" name="bidang_keahlian[]" value="{{ $bidang->id }}" id="bidang_{{ $bidang->id }}">
+                        <input type="checkbox" class="form-check-input" name="bidang_keahlian[]" value="{{ $bidang->id }}" id="bidang_{{ $bidang->id }}"~>
                         <label class="form-check-label" for="bidang_{{ $bidang->id }}">{{ $bidang->nama_bidang }}</label>
                     </div>
                 </div>
@@ -127,47 +127,47 @@
             <div class="row g-3">
                 <div class="col-md-6">
                     <label for="destinasi_sering" class="form-label fw-semibold">Destinasi wisata paling sering dikunjungi</label>
-                    <textarea class="form-control" name="destinasi_sering" id="destinasi_sering" rows="2"></textarea>
+                    <textarea class="form-control" name="destinasi_sering" id="destinasi_sering" rows="2" required></textarea>
                 </div>
                 <div class="col-md-3">
                     <label for="jumlah_tamu_max" class="form-label fw-semibold">Jumlah tamu yang pernah dibawa</label>
-                    <input type="number" class="form-control" name="jumlah_tamu_max" id="jumlah_tamu_max">
+                    <input type="number" class="form-control" name="jumlah_tamu_max" id="jumlah_tamu_max" required>
                 </div>
                 <div class="col-md-3">
                     <label for="lama_bertugas" class="form-label fw-semibold">Lama bertugas (tahun)</label>
-                    <input type="number" class="form-control" name="lama_bertugas" id="lama_bertugas">
+                    <input type="number" class="form-control" name="lama_bertugas" id="lama_bertugas" required>
                 </div>
                 <div class="col-md-6">
                     <label for="alasan_profesi" class="form-label fw-semibold">Alasan memilih profesi Tour Guide</label>
-                    <textarea class="form-control" name="alasan_profesi" id="alasan_profesi" rows="2"></textarea>
+                    <textarea class="form-control" name="alasan_profesi" id="alasan_profesi" rows="2" required></textarea>
                 </div>
                 <div class="col-md-6">
                     <label for="pelatihan" class="form-label fw-semibold">Pernah mengikuti pelatihan Pemandu Wisata? tolong sebutkan!</label>
-                    <textarea class="form-control" name="pelatihan" id="pelatihan" rows="2"></textarea>
+                    <textarea class="form-control" name="pelatihan" id="pelatihan" rows="2" required></textarea>
                 </div>
                 <div class="col-md-12">
                     <label for="travel_agency" class="form-label fw-semibold">Sebutkan Travel agensi yang pernah bekerja sama</label>
-                    <textarea class="form-control" name="travel_agency" id="travel_agency" rows="2"></textarea>
+                    <textarea class="form-control" name="travel_agency" id="travel_agency" rows="2" required></textarea>
                 </div>
                 <div class="col-md-12">
                     <label for="pengalaman_berkesan" class="form-label fw-semibold">Pengalaman paling berkesan selama menjadi tour guide</label>
-                    <textarea class="form-control" name="pengalaman_berkesan" id="pengalaman_berkesan" rows="2"></textarea>
+                    <textarea class="form-control" name="pengalaman_berkesan" id="pengalaman_berkesan" rows="2" required></textarea>
                 </div>
                 <div class="col-md-12">
                     <label for="pengalaman_komplain" class="form-label fw-semibold">Apakah Anda pernah memiliki pengalaman membawa tamu yang memiliki banyak permintaan dan selalu komplain?</label>
-                    <textarea class="form-control" name="pengalaman_komplain" id="pengalaman_komplain" rows="2"></textarea>
+                    <textarea class="form-control" name="pengalaman_komplain" id="pengalaman_komplain" rows="2" required></textarea>
                 </div>
                 <div class="col-md-12">
                     <label for="menyikapi_komplain" class="form-label fw-semibold">Bagaimana Anda menyikapi komplain dari tamu tersebut?</label>
-                    <textarea class="form-control" name="menyikapi_komplain" id="menyikapi_komplain" rows="2"></textarea>
+                    <textarea class="form-control" name="menyikapi_komplain" id="menyikapi_komplain" rows="2" required></textarea>
                 </div>
                 <div class="col-md-12">
                     <label for="menyiasati_hambatan" class="form-label fw-semibold">Bagaimana Anda menyiasati agar tour tetap berjalan dengan lancar meskipun sudah terdeteksi potensi hambatan sejak awal?</label>
-                    <textarea class="form-control" name="menyiasati_hambatan" id="menyiasati_hambatan" rows="2"></textarea>
+                    <textarea class="form-control" name="menyiasati_hambatan" id="menyiasati_hambatan" rows="2" required></textarea>
                 </div>
                 <div class="col-md-12">
                     <label for="rencana_meningkatkan_layanan" class="form-label fw-semibold">Di masa depan rencana apa yang telah Anda siapkan untuk meningkatkan layanan Anda sebagai tour guide?</label>
-                    <textarea class="form-control" name="rencana_meningkatkan_layanan" id="rencana_meningkatkan_layanan" rows="2"></textarea>
+                    <textarea class="form-control" name="rencana_meningkatkan_layanan" id="rencana_meningkatkan_layanan" rows="2" required></textarea>
                 </div>
             </div>
         </div>

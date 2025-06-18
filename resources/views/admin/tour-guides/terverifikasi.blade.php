@@ -2,6 +2,12 @@
 
 @section('content')
     <div class="container mt-4">
+        @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
 
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h3 class="fw-bold">Tour Guide Terverifikasi</h3>
@@ -102,7 +108,7 @@
                         </td>
                         <td>
                             <form action="{{ route('admin.tour-guides.destroy', $guide->user_id) }}" method="POST"
-                                onsubmit="return confirm('Yakin ingin menghapus tour guide ini beserta akun user-nya?')">
+                                onsubmit="return confirm('Yakin ingin menghapus data tour guide ini?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger">Hapus</button>

@@ -7,6 +7,8 @@ use App\Models\TourGuideProfiles;
 use App\Models\User;
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class TourGuideController extends Controller
 {
@@ -138,10 +140,7 @@ class TourGuideController extends Controller
             $profile->delete();
         }
 
-        // Hapus akun user
-        $user->delete();
-
-        return redirect()->route('admin.tour-guides.terverifikasi')->with('success', 'Tour guide berhasil dihapus.');
+        return redirect()->route('admin.tour-guides.terverifikasi')->with('success', 'Data Tour guide berhasil dihapus.');
     }
 
 

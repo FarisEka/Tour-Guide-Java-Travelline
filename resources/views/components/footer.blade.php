@@ -2,8 +2,8 @@
     <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
         
         <div class="mb-3 mb-md-0">
-            <a href="{{ url('/kontak') }}" class="text-dark fw-semibold me-5 text-decoration-none">Kontak</a>
-            <a href="{{ url('/tentang-kami') }}" class="text-dark fw-semibold me-5 text-decoration-none">Tentang Kami</a>
+            <a href="https://javatravelline.com/about-us/" class="text-dark fw-semibold me-5 text-decoration-none">Kontak</a>
+            <a href="https://javatravelline.com/contact-us/" class="text-dark fw-semibold me-5 text-decoration-none">Tentang Kami</a>
             <a href="https://javatravelline.com" target="_blank" class="text-dark fw-semibold text-decoration-none">Link Java Travelline</a>
         </div>
 
