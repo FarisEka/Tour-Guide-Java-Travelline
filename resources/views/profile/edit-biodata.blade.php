@@ -37,6 +37,12 @@
                                 <i class="bi bi-journal-text me-2"></i> Booking Masuk
                             </a>
                         </li>
+                        <li class="nav-item mb-3">
+                            <a href="{{ route('riwayat') }}"
+                                class="nav-link text-dark d-flex align-items-center {{ request()->routeIs('riwayat') ? 'active fw-bold bg-light rounded' : '' }}">
+                                <i class="bi bi-clock-history me-2"></i> Riwayat
+                            </a>
+                        </li>
                     </ul>
                 </div>
 

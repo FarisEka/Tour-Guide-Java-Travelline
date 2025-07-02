@@ -19,6 +19,7 @@ class Booking extends Model
         'tanggal_booking',
         'durasi_hari',
         'status',
+        'keterangan_penolakan',
     ];
 
     public function tourGuide()

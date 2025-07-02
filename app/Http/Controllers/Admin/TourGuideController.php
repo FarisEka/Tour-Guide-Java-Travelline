@@ -45,10 +45,11 @@ class TourGuideController extends Controller
         return redirect()->route('admin.tour-guides.pending')->with('success', 'Tour guide berhasil diverifikasi.');
     }
 
-    public function rejectGuide($id)
+    public function rejectGuide(Request $request, $id)
     {
         $guide = TourGuideProfiles::findOrFail($id);
         $guide->status_verifikasi = 'ditolak';
+        $guide->keterangan_penolakan = $request->keterangan_penolakan;
         $guide->save();
 
         return redirect()->route('admin.tour-guides.pending')->with('success', 'Tour guide telah ditolak.');

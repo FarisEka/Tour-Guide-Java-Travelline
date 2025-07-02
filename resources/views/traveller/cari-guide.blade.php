@@ -76,6 +76,7 @@
                             <h5 class="fw-bold fs-4">{{ $tourGuide->user->nama_lengkap }}</h5>
                             <p class="mb-1 text-muted fs-6">{{ $tourGuide->usia ?? '-' }} tahun &bullet;
                                 {{ $tourGuide->domisili_hpi }}</p>
+                                <p class="mb-1 text-muted fs-6">{{ $tourGuide->bahasa ?? '-' }}</p>
                             <p class="small text-secondary fst-italic mt-2">{{ $tourGuide->alasan_profesi }}</p>
                         </div>
 

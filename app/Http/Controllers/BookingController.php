@@ -42,19 +42,19 @@ class BookingController extends Controller
 
     public function masuk()
     {
-    $profile = TourGuideProfiles::where('user_id', Auth::id())->first();
+        $profile = TourGuideProfiles::where('user_id', Auth::id())->first();
 
-    if (!$profile) {
-        abort(404, 'Profil tour guide tidak ditemukan.');
+        if (!$profile) {
+            abort(404, 'Profil tour guide tidak ditemukan.');
+        }
+
+        $bookings = Booking::where('id_guide', $profile->id)
+            ->where('status', 'pending')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('profile.booking-masuk', compact('bookings'));
     }
-
-    $bookings = Booking::where('id_guide', $profile->id)
-    ->where('status', 'pending')
-        ->orderBy('created_at', 'desc')
-        ->get();
-
-    return view('profile.booking-masuk', compact('bookings'));
-}
 
     public function setujui($id)
     {
@@ -62,9 +62,40 @@ class BookingController extends Controller
         return back()->with('success', 'Booking disetujui.');
     }
 
-    public function tolak($id)
+    public function tolak(Request $request, $id)
     {
-        Booking::where('id', $id)->update(['status' => 'ditolak']);
-        return back()->with('success', 'Booking ditolak.');
+        $request->validate([
+            'keterangan_penolakan' => 'required|string',
+        ]);
+
+        Booking::where('id', $id)->update([
+            'status' => 'ditolak',
+            'keterangan_penolakan' => $request->keterangan_penolakan,
+        ]);
+
+        return back()->with('success', 'Booking ditolak dengan keterangan.');
     }
+
+    public function riwayat()
+{
+    $userId = Auth::id();
+    $email = Auth::user()->email;
+
+    // Ambil riwayat pendaftaran yang ditolak
+    $riwayatPendaftaran = \App\Models\TourGuideProfiles::with('user')
+        ->where('user_id', $userId)
+        ->where('status_verifikasi', 'ditolak')
+        ->get();
+
+     // Ambil ID profile tour guide
+    $riwayatBooking = \App\Models\Booking::with('tourGuide.user')
+    ->where('email', $email)
+    ->where('status', 'ditolak')
+    ->get();
+
+
+    return view('profile.riwayat', compact('riwayatPendaftaran', 'riwayatBooking'));
+}
+
+
 }

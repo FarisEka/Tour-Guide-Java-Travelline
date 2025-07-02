@@ -37,6 +37,7 @@ class TourGuideProfiles extends Model
         'rencana_meningkatkan_layanan',
         'foto',
         'status_verifikasi',
+        'keterangan_penolakan',
     ];
 
     public function user()
